@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Users;
 Route::get('/', function () {
     return view('welcome');
 });
 
+// <<<<<<< crud-delacruz/branch
+// Route::resource('users', UserController::class);
+// =======
 
 Route::get('/users', [UserController::class, 'index'])->name('user.page.index');
 Route::get('user/{id}', [UserController::class, 'show'])->name('user.page.show');
@@ -18,3 +21,4 @@ Route::post('/index', [UserController::class, 'store'])->name('users.store');
 
 
 
+// >>>>>>> main
