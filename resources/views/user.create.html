@@ -1,0 +1,14 @@
+
+
+<form action="{{route('users.store')}}"  method="post">
+    @csrf
+    <label for="name">Username:</label><br>
+    <input type="text" id="name" name="name" ><br>
+    <label for="email">:</label><br>
+    <input type="text" id="email" name="email" ><br>
+    <label for="password">:</label><br>
+    <input type="text" id="password" name="password"><br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
