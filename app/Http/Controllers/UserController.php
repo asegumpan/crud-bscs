@@ -12,8 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        $users = User::get(['name','email']);
         return view('user.index', compact(['users']));
+    ///gomez branch view getter 
     }
 
     /**
