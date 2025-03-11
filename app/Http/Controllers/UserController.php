@@ -12,7 +12,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get(['name','email']);
 
         return view('user.index', compact(['users']));
     }
@@ -42,14 +41,14 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         
-        return back()->with('success', 'User created successful!');
+        return back()->with('success', 'User created successfully!');
         
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show()
     {
         //
     }
@@ -57,17 +56,23 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Request $request)
     {
-       
+    
+        return view('users.edit');
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(Request $request)
     {
-        
+        $request->validate([
+            'name' => 'required|string|max:255',       
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+          ]);
     }
 
     /**
