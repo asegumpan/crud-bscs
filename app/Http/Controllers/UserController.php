@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-          
+        
     }
 
     /**
@@ -19,7 +21,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+       return view('user.create');
     }
 
     /**
@@ -45,13 +48,27 @@ class UserController extends Controller
         $user->save();
     
         return response()->json(['message' => 'User created successfully!']);
-       
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        
+        return back()->with('success', 'User created successfully!');
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         //
     }
@@ -59,24 +76,30 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+    
+        return view('users.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',       
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+          ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function destroy()
     {
-        //
+       
     }
 }
