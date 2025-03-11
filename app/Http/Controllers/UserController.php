@@ -12,7 +12,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $users = User::all();
+        $name = $users->name;
+        $email = $users->email;
+
+        return view('user.index', compact('name', 'email'));
     }
 
     /**
@@ -75,4 +79,4 @@ class UserController extends Controller
     {
        
     }
-
+}
