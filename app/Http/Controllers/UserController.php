@@ -40,7 +40,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         
-        return back()->with('success', 'User created successful!');
+        return back()->with('success', 'User created successfully!');
         
     }
 
@@ -75,4 +75,5 @@ class UserController extends Controller
     {
        
     }
+}
 
