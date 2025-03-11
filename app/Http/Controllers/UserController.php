@@ -47,7 +47,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show()
     {
         //
     }
@@ -55,17 +55,23 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Request $request)
     {
-       
+    
+        return view('users.edit');
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(Request $request)
     {
-        
+        $request->validate([
+            'name' => 'required|string|max:255',       
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+          ]);
     }
 
     /**
@@ -76,4 +82,3 @@ class UserController extends Controller
        
     }
 }
-
